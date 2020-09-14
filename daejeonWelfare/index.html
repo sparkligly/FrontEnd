@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>대전복지재단 홈페이지 입니다.</title>
+<!-- IE최신버전 -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+<!-- 뷰포트 -->
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, height=device-height, width=device-width">
+<link rel="icon" type="image/x-icon" href="./img/favicon.png">  
+<!-- 키워드 -->
+<meta name="keywords" content="대전복지재단">
+<meta name="Author" content="이지나"> 
+<!-- IE장면전환 -->
+<meta http-equiv="Page-Enter" content="Wipe down(Duration=1,Transition=12)">
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script>
+	$(document).ready(function(){
+		//toggle on/off
+		$("#toggle_menu").hide();
+
+		$("#toggle").click(function(){
+			$("#toggle_menu").slideDown("slow");
+		});
+
+		$("#toggle_close").click(function(){
+			$("#toggle_menu").slideUp("slow");
+		});
+
+		// 토글 아코디언 메뉴
+
+		$("#accordion").accordion({
+			active: false,
+			collapsible: true,
+		});
+		
+		$(".toggle_menu dt.nav").click(function(){
+			$(".toggle_menu dt.nav").css("background", "none");
+			$(".toggle_menu dt.nav").find("img").attr("src", "img/menu_arrow.png");
+			$(this).css("background", "#ff8500");
+			$(this).find("img").attr("src", "img/menu_arrow_on.png");
+		});
+
+		// 1011화면 메인 메뉴 슬라이드 효과
+		var oldImgId = "";
+		$(".menu ul li").hover(function(){
+
+			$("#"+oldImgId).find("img").attr("src", "img/"+oldImgId+".gif");
+			var imgId = $(this).attr("id");
+			$(this).find("img").attr("src", "img/"+imgId+"_on.gif");
+			
+			$(".menu").parent().find("#inner_menu").slideDown("normal").show();
+
+			oldImgId=imgId;
+
+			// 슬라이드 업 명령, 슬라이드 다운과 동시진행이 되지 않도록 내부적으로 선언
+			$(".menu").parent().hover(
+				function(){},
+				function(){
+					$(this).parent().find("#inner_menu").slideUp("fast");
+			});
+
+		}, function(){});
+
+		/* 이미지 사이즈의 height값을 동적으로 추출 */
+		var img=$("#container li.banner img").resize();
+		var hi=img.height();
+		$("#main_contents .main_ban").css("height", hi);
+
+		$(window).on("resize", function(e) { 
+			var imgHeight = $("#container li.banner img").height(); 
+			$("#main_contents .main_ban").css("height", imgHeight);
+		});
+
+		/* 메인배너 Fade효과 */
+		$("#container img").hide();
+		$("#container img:first").show();
+		$("#0").css("background","#5ebae4");
+
+		var oldIndex = 1;					//hide 이미지를 관리 
+		var newIndex;						//show 이미지를 관리
+		var imgs = $("#container img");
+
+		$(".btn_cl a").click(function(){
+			newIndex = $(this).attr("id"); 
+			
+			$(imgs[oldIndex]).fadeOut("slow");
+			$(imgs[newIndex]).fadeIn();
+			
+			$("#0").css("background","#ccc");
+			$("#"+oldIndex).css("background","#ccc");
+			$("#"+newIndex).css("background","#5ebae4");
+			oldIndex = newIndex;
+		});//end click
+
+		var btns = $(".btn_cl a");				
+		var btnsCount = $(btns).size();			
+		var btnIndex = 1;						
+
+		setInterval(function(){ 
+			if(btnsCount == btnIndex){ btnIndex = 0; }
+			$(btns[btnIndex]).trigger("click");
+			btnIndex += 1;						
+		}, 3000);	//end setInterval
+
+		/**** 후원정보 ****/
+		/* 화면 사이즈 측정을 위한 코드 start */
+		var display=$("#contents").resize();
+		var displayWi = display.width();
+	/*
+		$(window).on("resize", function(e){ 
+			var displayWi2 = $("#contents").width(); 
+			if(displayWi2 >= 980){ stop(); }else{ auto(); }
+		});
+	*/
+		/* 화면 사이즈 측정을 위한 코드 end */
+
+		var eleWidth = $('.banner_image ul li').width()*2;
+		var bannerAuto;
+		var isOn = false;
+		var direction = 'left';
+
+		//멈춤함수
+		function stop(){ clearInterval(bannerAuto); }
+		function auto(){
+			bannerAuto = setInterval( function(){
+				if(!isOn)
+				{
+					if(direction == 'left'){ $('#before').click(); }
+					else{ $('#next').click(); }
+				}
+			}, 3000);	//3초에 한번씩 실행
+		}	
+
+		// 오른쪽 버튼 움직임
+		function right(){
+			if(isOn)
+			{
+				direction = 'right';
+				$('.banner_image ul li:last').insertBefore($('.banner_image ul li:first'));
+				$('.banner_image ul li:last').insertBefore($('.banner_image ul li:first'));
+				$('.banner_image ul').css({left:eleWidth*-1});
+				$('.banner_image ul').stop().animate({left:0},500,'swing',function(){
+					$(this).css({left:0});
+					isOn = false;
+				});
+			}
+		}
+		// 왼쪽 버튼 움직임
+		function left(){
+			if(isOn)
+			{
+				direction = 'left';
+				$('.banner_image ul').stop().animate({left:eleWidth*-1},500,'swing',function(){
+					$(this).css({left:0});
+					$(this).children('li:first').insertAfter($(this).children('li:last'));
+					$(this).children('li:first').insertAfter($(this).children('li:last'));
+					isOn = false;
+				});	
+			}
+		}
+		//왼쪽버튼을 클릭했을때 이벤트 처리
+		$("#before").click(function(){
+			if(!isOn)
+			{	
+				isOn = true;
+				left();
+			}
+		});
+
+		//오른쪽버튼을 클릭했을때 이벤트 처리
+		$("#next").click(function(){
+			if(!isOn)
+			{	
+				isOn = true;
+				right();
+			}
+		});
+		
+		// 후원하기 배너 자동 실행
+		if(displayWi >= 980){ stop(); }else{ auto(); }
+	});
+</script>
+</head>
+<body>
+<div id="warp">
+
+	<!-- 토글메뉴 -->
+	<div id="toggle_menu" class="toggle_menu">
+		<dl id="accordion">
+			<!-- toggle_menu 1 -->
+			<dt class="nav">
+				<a href="#">열린참여마당</a><img src="img/menu_arrow.png" alt="메뉴아이콘" />
+			</dt>
+			<dd class="nav_lv2">
+				<ul>
+					<li><a href="#">자유게시판</a></li>
+					<li><a href="#">교육 및 행사신청</a></li>
+					<li><a href="#">발간물</a></li>
+					<li><a href="#">FAQ</a></li>
+					<li><a href="#">서식모음</a></li>
+					<li><a href="#">힐링 및 심리지원사업</a></li>
+					<li><a href="#">시정홍보</a></li>
+					<li><a href="#">대체인력지원사업</a></li>
+				</ul>
+			</dd>
+			
+			<!-- toggle_menu 2 -->
+			<dt class="nav">
+				<a href="#">재단소식</a><img src="img/menu_arrow.png" alt="메뉴아이콘" />
+			</dt>
+			<dd class="nav_lv2">
+				<ul>		
+					<li><a href="#">공지사항</a></li>
+					<li><a href="#">언론보도</a></li>
+					<li><a href="#">홍보영상/갤러리</a></li>
+					<li><a href="#">공고(입찰,채용)</a></li>
+					<li><a href="#">사회복지현장 생산품</a></li>
+				</ul>
+			</dd>
+			<!-- toggle_menu 3 -->
+			<dt class="nav">
+				<a href="#">사업소개</a><img src="img/menu_arrow.png" alt="메뉴아이콘" />
+			</dt>
+			<dd class="nav_lv2">
+				<ul>
+					<li><a href="#">연구개발부</a></li>
+					<li><a href="#">복지사업부</a></li>
+					<li><a href="#">동복지지원부</a></li>
+					<li><a href="#">공공사업지원부</a></li>
+					<li><a href="#">사회서비스지원단</a></li>
+				</ul>
+			</dd>
+			<!-- toggle_menu 4 -->
+			<dt class="nav">
+				<a href="#">대전사회복지회관</a><img src="img/menu_arrow.png" alt="메뉴아이콘" />
+			</dt>
+			<dd class="nav_lv2">
+				<ul>
+					<li><a href="#">입주단체</a></li>
+				</ul>
+			</dd>
+			<!-- toggle_menu 5 -->
+			<dt class="nav">
+				<a href="#">재단소개</a><img src="img/menu_arrow.png" alt="메뉴아이콘" />
+			</dt>
+			<dd class="nav_lv2">
+				<ul>
+					<li><a href="#">대표이사 인사말</a></li>
+					<li><a href="#">사업목표(Vision)</a></li>
+					<li><a href="#">연혁</a></li>
+					<li><a href="#">조직업무</a></li>
+					<li><a href="#">CI 소개</a></li>
+					<li><a href="#">경영공시</a></li>
+					<li><a href="#">소식지</a></li>
+					<li><a href="#">오시는길</a></li>
+					<li><a href="#">윤리경영</a></li>
+					<li><a href="#">신문고</a></li>
+					<li><a href="#">고객서비스 헌장</a></li>
+				<ul>
+			</dd>
+			<!-- toggle_menu 6 -->
+			<dt class="nav">
+				<a href="#">사회복지전문가DB</a><img src="img/menu_arrow.png" alt="메뉴아이콘" />
+			</dt>
+			<dd class="nav_lv2">
+				<ul>
+					<li><a href="#">사회복지전문가 등록</a></li>
+					<li><a href="#">사회복지전문가 검색</a></li>
+					<li><a href="#">정보제공요청</a></li>
+				</ul>
+			</dd>
+		</dl><!-- end accordion -->
+		<div id="toggle_close"><h1>CLOSE</h1></div>
+	</div><!-- end toggle_menu -->
+
+	<header><!-- 헤더 -->
+
+
+		<!-- myInfo layout 검색창 네브-->
+		<div id="myInfo1011">
+			<div class="myInfo">
+				<ul>
+					<li><a href="#">HOME</a></li>
+					<li class="bar">|</li>
+					<li><a href="#">로그인</a></li>
+					<li class="bar">|</li>
+					<li><a href="#">회원가입</a></li>
+					<li class="bar">|</li>
+					<li><a href="#">ENGLISH</a></li>
+					<li class="bar">|</li>
+					<li><a href="#">오시는길</a></li>
+					<li class="bar">|</li>
+					<li class="search">
+						<input type="text" id="" alt="검색창" />
+						<input type="image" src="img/btn_search.gif" alt="검색 버튼" width="35px" />
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- TOP layout 탑메뉴 -->
+		<div id="top">
+			<div class="top480">
+				<div class="toggle" id="toggle">
+					<img src="img/btn_menu.gif"/>
+				</div>
+				<div class="logo">
+					<a href="반응형_웹_연습.html"><img src="img/logo_480.gif"/></a>
+				</div>
+				<!-- 640~1010에서 출력 -->
+				<div id="myInfo_640">
+					<a href="#">로그인</a>
+					<a href="#">회원가입</a>
+				</div>
+
+				<div class="info">
+					<img src="img/btn_open_s.gif"/>
+				</div>
+			</div>
+
+			<div class="top1011">
+				<h1><a href="#">한국백혈병소아암협회</a></h1>
+				<div class="menu">
+					<ul>
+						<li id="menu01"><a href="#"><img src="img/menu01.gif"/></a></li>
+						<li id="menu02"><a href="#"><img src="img/menu02.gif"/></a></li>
+						<li id="menu03"><a href="#"><img src="img/menu03.gif"/></a></li>
+						<li id="menu04"><a href="#"><img src="img/menu04.gif"/></a></li>
+						<li id="menu05"><a href="#"><img src="img/menu05.gif"/></a></li>
+						<li id="menu06"><a href="#"><img src="img/menu06.gif"/></a></li>
+					</ul>
+				</div>
+				<div id="inner_menu" class="inner_menu">
+					<ul class="fl">
+						<li><a href="#">인사말</a></li>
+						<li><a href="#">연혁</a></li>
+						<li><a href="#">구성원</a></li>
+						<li><a href="#">조직도</a></li>
+						<li><a href="#">전국지부</a></li>
+						<li><a href="#">전국후원회</a></li>
+					</ul>
+					<ul class="fl">
+						<li><a href="#">후원안내</a></li>
+						<li><a href="#">후원신청</a></li>
+					</ul>
+					<ul class="fl">
+						<li><a href="#">캠페인소개</a></li>
+						<li><a href="#">온라인서명하기</a></li>
+					</ul>
+					<ul class="fl">
+						<li><a href="#">묻고대답하기</a></li>
+					</ul>
+					<ul class="fl">
+						<li><a href="#">공지사항</a></li>
+						<li><a href="#">보도자료</a></li>
+						<li><a href="#">아동학대신고</a></li>
+						<li><a href="#">실종아동찾기</a></li>
+					</ul>
+					<ul class="fl">
+						<li><a href="#">센터소개</a></li>
+						<li><a href="#">센터이용안내</a></li>
+						<li><a href="#">사랑의공지사항</a></li>
+						<li><a href="#">사랑의게시판</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<!-- 이벤트 배너: 후원신청 -->
+		<div id="ban_ev480">
+			<a href="#">힐링 및 심리 지원</a>
+		</div>
+	</header>
+
+	<!-- contents layout -->
+	<div id="contents">
+		<section id="main_section" class="fl">
+			<section id="main_contents">
+				<div class="main_ban">
+					<!-- 배너 슬라이드 -->
+					<div id="container">
+						<ul>
+							<li class="banner"><a href="#"><img src="img/ban_img_01.jpg"  width="100%"/></a></li>
+							<li class="banner"><a href="#"><img src="img/ban_img_02.jpg"  width="100%"/></a></li>
+							<li class="banner"><a href="#"><img src="img/ban_img_03.jpg"  width="100%"/></a></li>
+							<li class="banner"><a href="#"><img src="img/ban_img_04.jpg"  width="100%"/></a></li>
+							
+						</ul>
+					</div>
+					<div class="play_box">
+						<div class="btn_con" id="pause"><input type="image" src="img/btn_pause.png" width="24px"/></div>
+						<div class="btn_con" id="play" style="display: none;"><input type="image" src="img/btn_play.png" width="24px"/></div>
+						<div class="btn_cl">
+							<a href="#" id="0"></a>
+							<a href="#" id="1"></a>
+							<a href="#" id="2"></a>
+							<a href="#" id="3"></a>
+							
+						</div>
+					</div>
+				</div>
+				<!-- 메뉴: nav -->
+				<div class="even_menu">
+					<ul>
+						<li class="manu fl">
+							<a href="#">
+								<span class="tc fl">대관예약 현황</span>
+								<img class="menu_cl fr" src="img/main_quick_more2.png" alt="대관예약 현황"/>
+							</a>
+						</li>
+						<li class="manu fl">
+							<a href="#">
+								<span class="tc fl">대체인력지원 안내</span>
+								<img class="menu_cl fr" src="img/main_quick_more3.png" alt="대체인력지원안내"/>
+							</a>
+						</li>
+						<li class="manu fl">
+							<a href="#">
+								<span class="tc fl">발간물 다운로드</span>
+								<img class="menu_cl fr" src="img/main_quick_more.png" alt="발간물 다운로드"/>
+							</a>
+						</li>
+					</ul>
+				</div>
+			
+				<!-- main -->
+				<div class="contentsBox">
+					<div class="box fl">
+						<div class="box_img">
+							<img src="img/board_img_01.jpg" alt="완치자치(송년행사) 지원사업 신청안내" width="100%" height="147px"/>
+						</div>
+						<div class="box_text">
+							<div class="title">
+								<h3>공지사항</h3>
+								<input type="image" src="img/main_box_more.png">
+							</div>
+							<div class="text">
+								<h4>2018 사회복지시설 경영컨설팅 신규컨설팅기관 모집(재공고)</h4>
+								<span>2018.08.23</span>
+								<p>사회복지시설 효율적 경영의 선순환 구조를 위해 「2018 사회복지시설 경영컨설팅」  신규 컨설팅기관을 아래와 같이 모집하오니 많은 관심과 참여 바랍니다.
+									<br><br>
+									 모집기간: 2018. 8. 22.(수) ~ 8. 29.(수)
+								    <br>컨설팅기간: 2018. 9월 ~ 11월
+								    <br>신청내용: 비전설계분야(4개소)
+								    <br>신청방법: 전자우편 신청(manim0306@dwf.kr)<br>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="box fl">
+						<div class="box_img">
+							<img src="img/board_img_02.jpg" alt="완치자치(송년행사) 지원사업 신청안내" width="100%" height="147px"/>
+						</div>
+						<div class="box_text">
+							<div class="title">
+								<h3>갤러리</h3>
+								<input type="image" src="img/main_box_more.png">
+							</div>
+							<div class="text">
+								<h4>[사회서비스지원단]2017 사회서비스 홍보박람회</h4>
+								<span>2018.5.20</span>
+								<p> 대전 복지재단 사회서비스 지원단은 05월21일(토) 10시~16시까지 서대전 시민공원 잔디광장 및 메인무대에서 대전시민을 대상으로 사회서비스 홍보박람회를 개최하였습니다. 홍보박람회는 사회서비스 소개 및  홍보체험부스 운영으로 진행되었으며 많은 시민들이 참여하여 박람회를 즐겼습니다.</p>
+							</div>
+						</div>
+					</div>
+					<div class="box fl">
+						<div class="box_img">
+							<img src="img/board_img_03.png" alt="완치자치(송년행사) 지원사업 신청안내" width="100%" height="147px"/>
+						</div>
+						<div class="box_text">
+							<div class="title">
+								<h3>언론보도</h3>
+								<input type="image" src="img/main_box_more.png">
+							</div>
+							<div class="text">
+								<h4>대전시, 지역사회보장계획 시민과 함께 만든다</h4>
+								<span>2018.06.08</span>
+								<p> 대전시와 대전복지재단은 7일 대전청소년위캔센터에서 제 4기 지역사회보장계획 수립을 위한 시민설명회를 개최했다. 이날 설명회에는 시민과 현장전문가, 시 유관부서 관계자 등 100여 명이 참석해 지역사회보장계획의 목적과 수립절차를 공유하고 시민참여 방안에 대한 의견을 개진했다. </p>
+							</div>
+						</div>
+					</div>
+					<div class="box fl">
+						<div class="box_img">
+							<img src="img/board_img_04.jpg" alt="완치자치(송년행사) 지원사업 신청안내" width="100%" height="147px"/>
+						</div>
+						<div class="box_text">
+							<div class="title">
+								<h3>대전교통약자지원센터</h3>
+								<input type="image" src="img/main_box_more.png">
+							</div>
+							<div class="text">
+								<h4>「대전교통약자지원센터」발전방안 마련 포럼 개최</h4>
+								<span>2018.08.07</span>
+								<p>대전교통약자이동지원센터는 2005년을 기점으로 하여 차량을 이용하고자 하는 교통약자에게 안전하게 차량이동서비를 제공하기 위해 최선을 다하고 있습니다.
+									 <br>
+									  <br>
+								장소 : 대전평생교육진흥원
+								대상 : 교통약자이동지원센터 이용자 및 관련 기관, 단체, 협회 관계자등</p>
+							</div>
+						</div>
+					</div>
+					<div class="box fl">
+						<div class="box_img">
+							<img src="img/board_img_05.jpg" alt="완치자치(송년행사) 지원사업 신청안내" width="100%" height="147px"/>
+						</div>
+						<div class="box_text">
+							<div class="title">
+								<h3>사회복지현장 생산품</h3>
+								<input type="image" src="img/main_box_more.png">
+							</div>
+							<div class="text">
+								<h4>오롯이 '품질'로 승부를 건다. 사회복지법인 밀알선교단 '밀알드림센터'</h4>
+								<span>2015.11.20 </span>
+								<p> “가격경쟁력과 디자인, 인쇄 모두 다른 업체에 전혀 밀리지 않습니다. 믿고 한번 맡겨보시죠.” <br>
+									<br> 여광조 시설장이 ‘믿고 맡겨 달라’고 적극적으로 말할 수 있는 데는 다 이유가 있다. 생산품에 자신 있기 때문.</p>
+							</div>
+						</div>
+					</div>
+					<div class="box fl">
+						<div class="box_img">
+							<img src="img/board_img_06.png" alt="완치자치(송년행사) 지원사업 신청안내" width="100%" height="147px"/>
+						</div>
+						<div class="box_text">
+							<div class="title">
+								<h3>홍보영상</h3>
+								<input type="image" src="img/main_box_more.png">
+							</div>
+							<div class="text">
+								<iframe width="100%" src="https://www.youtube.com/embed/pfU8tvJM4Pc" frameborder="0" allowfullscreen></iframe>
+								<!-- 
+								<video src="https://www.youtube.com/embed/nfufmLyBzhM" controls poster="https://i.ytimg.com/vi/nfufmLyBzhM/mqdefault.jpg"></video>
+								-->
+								<h4>최저임금해결사 일자리안정자금</h4>
+								<span>2018. 1. 31</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			
+			<section id="amount_list_sec">
+				<ul class="amount_list">
+					<li><span class="title fl">오늘 방문자</span><span class="count fr">45</span></li>
+					<li><span class="title fl">이번달 방문자</span><span class="count fr">2203</span></li>
+					<li><span class="title fl">올해 복지지원인력</span><span class="count fr">141,930</span></li>
+				</ul>
+			</section>
+		</section>
+		<!-- aside -->
+		<aside id="aside" class="fr">
+			<section id="amount_list_asi" class="fl">
+				<ul class="amount_list">
+					<li><span class="title fl">오늘 방문자</span><span class="count fr">45</span></li>
+					<li><span class="title fl">이번달 방문자</span><span class="count fr">2203</span></li>
+					<li><span class="title fl">올해 복지지원인력</span><span class="count fr">141,930</span></li>
+				</ul>
+			</section>
+			
+			<div id="ban_ev1011"><a href="#">힐링 및 심리지원 신청</a></div>
+			<!-- 계좌 정보 -->
+			<div id="acountInfo">
+				<ul>
+					<li class="li_1 fl"><a href="#">대전인생<br>이모작지원센터&nbsp;<i class="fas fa-chevron-circle-right"></i></a></li>
+					<li class="li_2 fl"><a href="#"><span>대전지역사회</span><br>서비스지원단&nbsp;<i class="fas fa-chevron-circle-right"></i></a></li>
+					<li class="li_3 fl"><a href="#">
+						<p class="title">대전사회복지회관</p>
+						<p class="bank"><strong><br>(사)한국자폐인사랑협회 대전지회</strong><br>042-226-2465</p>
+						<p class="bank"><strong>(사)대전시 교통장애인재활협회</strong><br>042-488-9457</p>
+						<p class="bank"><strong>(사)한국장루협회 대전지부</strong><br>042-252-8365</p>
+						<p class="bank"><strong>(사)대전장애인부모회</strong><br>042-252-8365</p>
+						<p class="bank"><strong>(사)대전장애인재활협회</strong><br>042-252-8365</p>
+					</a></li>
+				</ul>
+			</div>
+
+			<!-- 후원정보 -->
+			<div id="acountInfo_ban">
+				<!-- btn -->
+				<div id="before" class="btn fl"><input type="image" src="img/btn_before2.gif" name="" /></div>
+				<div id="next" class="btn fr"><input type="image" src="img/btn_next2.gif" name="" /></div>
+				<!-- img -->
+				<div class="banner_image">
+					<ul>
+						<li class="fl"><a href="#"><img src="img/side_ban_01.gif" alt="" /></a></li>
+						<li class="fl"><a href="#"><img src="img/side_ban_02.gif" alt="" /></a></li>
+						<li class="fl"><a href="#"><img src="img/side_ban_03.gif" alt="" /></a></li>
+						<li class="fl"><a href="#"><img src="img/side_ban_04.gif" alt="" /></a></li>
+						<li class="fl"><a href="#"><img src="img/side_ban_05.gif" alt="" /></a></li>
+						<li class="fl"><a href="#"><img src="img/side_ban_06.gif" alt="" /></a></li>
+						<li class="fl"><a href="#"><img src="img/side_ban_07.gif" alt="" /></a></li>
+					</ul>
+				</div>
+			</div><!-- end acountInfo_ban -->
+			<div id="sns_1011" class="sns">
+				<ul>
+					<li><a href="#"><img src="img/SNS_Twitter.gif" alt=""/></a></li>
+					<li><a href="#"><img src="img/SNS_Facebook.gif" alt=""/></a></li>
+					<li><a href="#"><img src="img/SNS_Youtube.gif" alt=""/></a></li>
+				</ul>
+			</div>
+
+
+		</aside>
+	</div>
+
+	<div id="spon">
+		<h3>대전복지재단</h3>
+		<ul>
+			<li><a href="#"><img src="img/company1.jpg" alt="" /></a></li>
+			<li><a href="#"><img src="img/company2.jpg" alt="" /></a></li>
+			<li><a href="#"><img src="img/company3.jpg" alt="" /></a></li>
+			<li><a href="#"><img src="img/company4.jpg" alt="" /></a></li>
+			<li><a href="#"><img src="img/company5.jpg" alt="" /></a></li>
+			<li><a href="#"><img src="img/company6.jpg" alt="" /></a></li>
+			<li><a href="#"><img src="img/company7.jpg" alt="" /></a></li>
+			<li><a href="#"><img src="img/company8.jpg" alt="" /></a></li>
+			<li><a href="#"><img src="img/company9.gif" alt="" /></a></li>
+			<li><a href="#"><img src="img/company10.gif" alt="" /></a></li>
+		</ul>
+		<div class="btn_spon">
+			<div><a href="#"><img src="img/btn_before.gif" alt=""/></a></div>
+			<div><a href="#"><img src="img/btn_next.gif" alt=""/></a></div>
+		</div>
+	</div>
+
+	<!-- footer layout -->
+	<footer id="footer">
+		<div id="sns_all" class="sns">
+			<ul>
+				<li><a href="#"><img src="img/SNS_Twitter.gif" alt=""/></a></li>
+				<li><a href="#"><img src="img/SNS_Facebook.gif" alt=""/></a></li>
+				<li><a href="#"><img src="img/SNS_Youtube.gif" alt=""/></a></li>
+			</ul>
+		</div>
+
+		<div id="footer1011">
+			<div class="pri_policy">
+				<ul>
+					<li><a href="#">오시는길</a></li>
+					<li class="bar">|</li>
+					<li class="point_ora"><a href="#">개인정보 취급방침</a></li>
+					<li class="bar">|</li>
+					<li><a href="#"><input type="image" src="img/icon_rss.gif" alt="icon of rss"></a></li>
+					<li class="bar">|</li>
+					<li><a href="#">ENGLISH&nbsp;&nbsp;&nbsp;</a></li>
+					<li class="bar">|</li>
+					<li><a href="#">이메일주소 수집거부</a></li>
+				</ul>
+			</div>
+			<div class="family_site">
+				<select>
+					<option>서울시복지재단</option>
+					<option>경기복지재단</option>
+					<option>전남복지재단</option>
+					<option>광주복지재단</option>
+					<option>경북행복재단</option>
+					<option>부산복지개발원</option>
+				</select>
+				<input type="image" name="" id="" src="img/btn_go.gif" alt="go버튼" />
+			</div>
+		</div>
+		<div class="add">
+			<address><strong>대전복지재단 &nbsp;</strong>Daejeon Welfare Foundation<br /><strong>주소</strong> (34917) 대전광역시 중구 보문로 246,10층(대흥동)<span>|</span><strong>E-mail </strong>nsm@dwf.kr<span>|</span><strong>TEL</strong> 042-331-5078<span>|</span><strong>Fax</strong> 042-331-8924</address>
+			<p>COPYRIGHT (C) 2012 Daejeon Welfare Foundation, ALL RIGHTS RESERVED.</p>
+		</div>
+	</footer>
+</div>
+
+</body>
+</html>
