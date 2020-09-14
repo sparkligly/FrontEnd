@@ -1,0 +1,295 @@
+@charset "UTF-8";
+
+*{margin: 0;padding: 0;}
+
+html,body{width: 100%; /*height: 100%; overflow-x: hidden;*/
+font-family: 'Lato', sans-serif;
+font-family: 'Nanum Gothic', sans-serif;
+font-size: 0.8333333333333333vw;
+line-height: 1.5; 
+background-color: transparent; }
+ul,li{list-style-type: none;}
+a{text-decoration: none;margin: 0; color: #555;}
+img{ border: none; /*box-sizing: border-box;*/}
+em,address{font-style: normal;}
+article{overflow: hidden;}
+
+/*전체*/
+  #fullpage{width: 100%;/* position: relative;*/}
+  .section{position: relative;overflow: hidden;}
+  #slide1{}
+  #slide2{}
+  
+  #section3{}
+  #section4{}
+
+
+/*---------------section1---------------*/
+
+/*슬라이드1*/
+#slide1{height: 100vh; position: relative;}
+	
+	/*컨텐츠1*/
+	#content1{position: absolute; width: 100vw;}
+		#mainnav{display: -webkit-flex;
+			     display: -moz-flex;
+			     display: -ms-flex;
+			     display: -o-flex;
+			     display: flex;
+			     width: 100%;}
+			/*로고*/     
+			#mainnav .logo{width: 30%;margin-top: 2.5vh;}
+			.logo a{ color: #009999; margin-left: 20%; font-size:1.5625vw; font-weight: bold;}
+			/*.logo:hover a{ text-indent: -9999px; background-image: url(../img/s_images/logo.png);-webkit-background-size: cover; color: #000;background-size: cover; background-repeat: no-repeat; text-indent: -9999px;}*/
+			/*네비게이션*/
+			#mainnav .nav{width: 70%;}
+			#gnb{position: relative;width: 100%; background-color: #fff;}
+			.ulgnb{left: 5%; margin-top: 2.5vh; display: -webkit-flex;
+			display: -moz-flex;
+			display: -ms-flex;
+			display: -o-flex;
+			display: flex;}
+			.ulgnb li{margin-left: 8%; width: 15%;/* height: 8vh;*/}
+			.ulgnb a{font-size: 1.822916666666667vw;/*35*/ font-weight: bold;color: #009999; font-family: 'Permanent Marker', cursive; }
+			
+			/*서브있을시 사용.menu{}*/
+			.top_menu1:hover .menu1{}
+
+	/*컨텐츠2*/
+	#content2{position: absolute;top: 9vh;}
+		/*텍스트박스*/
+		#textbox1{width: 100vw; height: 100vh; position: relative;
+			background-image: url(../images/p_images/main2.jpg);background-repeat: no-repeat; -webkit-background-size: 100%;color: #009999;
+			}
+
+			#textbox1 .text1{position: absolute;left: 50%; top: 30%;
+				width: 46.875vw; height: 31.25vh;}
+			/*큰제목*/
+			.text1 h1{font-family: 'Lato', sans-serif; font-weight: bold;  font-size: 4.3vw;text-shadow:#999999 5px 5px 9px;color: #fff;}
+			.text1 span{ font-family: 'Permanent Marker', cursive; font-size: 2vw;}
+			/*내용*/
+			.text1 p{font-family: 'Nanum Gothic', sans-serif; margin-top: 5%; font-weight: bold; line-height: 1.9;}
+
+   
+
+/*슬라이드2*/
+#slide22{height: 100vh; position: relative;}
+	#slide22 #content3{position: absolute; width: 100vw;}
+		/*네비게이션*/
+		#slide22 #mainnav2{display: -webkit-flex;
+			     display: -moz-flex;
+			     display: -ms-flex;
+			     display: -o-flex;
+			     display: flex;
+			     width: 100%;}
+			/*로고*/ 
+			#mainnav2 .logo2{width: 30%;margin-top: 2.5vh;}
+			.logo2 a{ color: #009999; margin-left: 20%; font-size:1.5625vw; font-weight: bold;}
+			/*.logo2:hover a{ text-indent: -9999px; background-image: url(../img/s_images/logo.png);-webkit-background-size: 100%; color: #000;
+			background-size: 100%; background-repeat: no-repeat; text-indent: -9999px;}
+*/
+			#mainnav2 .nav2{width: 70%;}
+			#gnb2{position: relative;width: 100%; }
+			.ulgnb2{left: 5%; margin-top: 2.5vh; display: -webkit-flex;
+			display: -moz-flex;
+			display: -ms-flex;
+			display: -o-flex;
+			display: flex;}
+			.ulgnb2 li{margin-left: 8%; width: 15%;/* height: 8vh;*/}
+			.ulgnb2 a{font-size: 1.822916666666667vw;/*35*/ font-weight: bold;color: #009999; }
+			
+			/*서브있을시 사용.menu{}*/
+			.top_menu12:hover .menu1{}
+
+
+	#content4{position: absolute;}
+		#textbox2{width: 100vw; height: 100vh; position: relative;
+			background-image: url(../images/p_images/maingif.gif);background-repeat: no-repeat; -webkit-background-size: 100%;color: #fff;}
+			/*텍스트박스*/
+			#textbox2 .text2{position: absolute;left: 50%; top: 30%;
+				width: 46.875vw; height: 31.25vh;}
+			/*큰제목*/
+			.text2 h1{font-family: 'Lato', sans-serif; font-weight: bold;  font-size: 4.3vw;text-shadow:#999999 5px 5px 9px;}
+			.text2 span{ font-family: 'Permanent Marker', cursive; font-size: 2vw;	text-shadow:#999999 5px 5px 9px;color: #fff;}
+			/*내용*/
+			.text2 p{font-family: 'Nanum Gothic', sans-serif; margin-top: 5%; font-weight: bold; line-height: 1.9;}
+
+   
+/*---------------section2---------------*/
+
+#content4{width: 100vw;height: 100vh; position: relative;
+background-image: url(../images/p_images/sub1.jpg);background-repeat: no-repeat; -webkit-background-size: cover;background-size: cover;}
+/*보틀*/
+#bottle{position: absolute; top: 25%; left: 45%; }
+#bottle img{width: 260px; height: 710px;
+ cursor: pointer;z-index: 10;}
+
+/*텍스트*/
+#beforetext{position: absolute; z-index: 20;top:76%;
+    left: 67%;}
+#beforetext span{font-family: 'Noto Sans KR', sans-serif;
+	position: relative; font-size: 1.25vw; font-weight: bold; 
+	color: #2a2a50; line-height: 1.5;z-index: 20;}
+
+
+/*섹션2 쉼표*/
+#beforetext span:after{font-family: 'IM Fell Double Pica', serif;
+					content:open-quote;
+					font-size: 5vw;
+					z-index: 5;
+					color: rgb(66, 68, 71,0.7);
+					text-indent: -7.8125vw;
+					line-height: 1;z-index: 25;}
+
+
+ /*어플*/
+#appbt{position: absolute; left: 94%;top:94%; z-index: 20; }
+#appbt a{font-family: 'Noto Sans KR', sans-serif;color: #333; z-index: 25; font-weight: bold;}
+
+#appbt img{width: 102px; height: 12px;}
+
+
+
+
+/*---------------section3---------------*/
+
+#content5{position: relative;margin:0 auto; width: 100vw; height: 100vh;}
+#text3{position: absolute; 
+	top: 10%; 
+	left: 10%; 
+	cursor: pointer;
+	z-index: 10;}
+
+#text3 h1{font-size: 1.822916666666667vw;/*35*100/1920*/}
+#text3 span{line-height: 1.5;
+		font-size: 1.041666666666667vw;/*16*100/1920*/
+			font-weight: bold;
+			color: #999;}
+
+#vidieo{position: relative; 
+	top: 200px;
+    margin: 0 auto;
+    width: 600px;
+    height: 550px;
+	margin:0 auto; 
+	cursor: pointer;
+	z-index: 1; overflow: hidden;
+	background-color: #ccc;}
+#vidieo iframe{position: absolute; bottom: 50px;
+	 z-index: 1;     margin-top: -110px;
+    width: 100%;
+    height: 110%;
+}
+#text4{position: absolute; 
+	top: 80%; right: 8%; 
+	cursor: pointer;z-index: 10;}
+#text4 p{font-size:1.8vw; /*20*100/1920*/
+		line-height: 2.5;
+		font-weight: bold;
+		letter-spacing: 2%;}
+
+
+
+/*---------------section4---------------*/
+ #section4{/*background-color: #555;*/}
+
+ /*슬라이드1*/
+#section4{position: relative; text-indent: -9999px;}
+#slide5{width: 100vw; height: 100vh; background-image: url(../images/s_images/s4_1.png);background-repeat: no-repeat; -webkit-background-size:100% 100%;background-size:100% 100%;}
+#slide6{width: 100vw; height: 100vh; background-image: url(../images/s_images/s4_2.png);background-repeat: no-repeat; -webkit-background-size:100% 100%;background-size:100% 100%;}
+#slide7{width: 100vw; height: 100vh; background-image: url(../images/s_images/s4_3.png);background-repeat: no-repeat;  -webkit-background-size:100% 100%;background-size:100% 100%;}
+#slide8{width: 100vw; height: 100vh; background-image: url(../images/s_images/s4_4.png);background-repeat: no-repeat; -webkit-background-size:100% 100%;background-size:100% 100%;}
+
+
+
+
+
+
+/*미디어쿼리*/
+
+@media screen and (min-width:1280px) and (max-width:1599px){
+	#textbox1{width: 100vw; height: 100vh; position: relative;
+			background-image: url(../images/p_images/main2.jpg);background-repeat: no-repeat; -webkit-background-size:cover;color: #009999;
+			background-size:cover;}
+
+	.logo a{ color: #009999; margin-left: 15%; font-size:1vw;}
+	#textbox2{width: 100vw; height: 100vh; position: relative;
+			background-image: url(../images/p_images/maingif.gif);background-repeat: no-repeat; -webkit-background-size:cover;background-size:cover; color: #fff;}
+#beforetext {
+    left: 74%;}
+
+#bottle img {
+    width: 90%;
+    height: 30%;}
+#appbt {left: 88%;}
+
+#vidieo iframe {
+    width: 100%;
+    height: 110%;}
+#text4 {top: 57%;}
+#text4 p{color: #fff;}
+
+}
+
+@media screen and (min-width:1024px) and (max-width:1279px){
+		#textbox1{width: 100vw; height: 100vh; position: relative;
+			background-image: url(../images/p_images/main2.jpg);background-repeat: no-repeat; -webkit-background-size:cover;color: #009999;
+			background-size:cover; background-position: center center;}
+
+	.logo a{ color: #009999; margin-left: 15%; font-size:1vw;}
+	#textbox2{width: 100vw; height: 100vh; position: relative;
+			background-image: url(../images/p_images/maingif.gif);background-repeat: no-repeat; -webkit-background-size:cover;background-size:cover; color: #fff; background-position: center center;}
+#beforetext {
+    left: 74%;}
+
+#bottle img {
+    width: 90%;
+    height: 30%;}
+#appbt {left: 88%;}
+
+#vidieo iframe {
+    width: 100%;
+    height: 110%;}
+#text4 {top: 57%;}
+#slide5{background-position: left center;-webkit-background-size:120% 70%;background-size:120% 70%;}
+#slide6{background-position: left center;-webkit-background-size:120% 70%;background-size:120% 70%;}
+#slide7{background-position: right center;-webkit-background-size:120% 70%;background-size:120% 70%;}
+#slide8{background-position: right center;-webkit-background-size:120% 70%;background-size:120% 70%;}
+#text4 p{color: #ccc;}
+}
+
+
+@media screen and (min-width:780px) and (max-width:1023px){
+	#textbox1{width: 100vw; height: 100vh; position: relative;
+			background-image: url(../images/p_images/main2.jpg);background-repeat: no-repeat; color: #009999;
+			-webkit-background-size:70% 150%;
+			background-size: 70% 150%;}
+#text4 p{color: #ccc;}
+
+}
+
+
+
+@media screen and (min-width:640px) and (max-width:779px){
+#text4 p{color: #ccc;}
+
+}
+
+@media screen and (max-width:479px){
+#text4 p{color: #ccc;}
+#bottle img {
+    width: 92%;
+    height: 11%;}
+#beforetext {
+    top: 60%;
+    left: 25%;}
+
+#beforetext span {
+    font-size: 3.25vw;
+    line-height: 6.5;
+	color: #666;}
+	#textbox1{width: 100vw; height: 100vh; position: relative;
+			background-image: url(../images/p_images/main2.jpg);background-repeat: no-repeat; -webkit-background-size:cover;color: #009999;
+			background-size:cover;}
+
+}
