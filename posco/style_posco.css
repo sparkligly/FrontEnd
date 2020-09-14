@@ -1,0 +1,174 @@
+*{padding: 0; margin: 0;}
+body,html{width: 100%; height: 100%; font-family: 'Noto Sans KR', sans-serif;}
+ul,li{list-style: none;}
+a{text-decoration: none;}
+img{border: 0;}
+
+.wrap{width: 100%;height: 100%;}
+.page{width: 100%;height: 100%; clear: both; overflow: hidden; position: relative;}
+.hpage{width: 100%;height: 50%; clear: both;}
+
+#hd{position: fixed; top: 0; left: 0; width: 100%; height: 80px; background-color: rgba(255,255,255,0.7); z-index: 100;}
+#hd .logo{display: block; width: 72px; height: 58px; float: left; margin-left: 1%; margin-top: 11px;} 
+/*세로는 mt 픽셀, 가로는 퍼센트 mlmr*/
+#gnb{float: left; margin-left: 30%;}
+#gnb li{float: left; padding: 20px;}
+#gnb li a{clear: both; font-size: 16px; color: #333; font-weight: 700; display: block;}/*font-weigt는단위없지롱*/
+
+
+/*메뉴 쩜들*/
+#gnb li a:before{clear: both;content: "";display: block; width: 1px;height: 3px; background-color: transparent; transition: 0.7s; margin-bottom: 6px;}
+/*a:beforea태그의 앞에*/
+
+#gnb li a:after{clear: both;content: "";display: block; width: 0px;height: 3px; background-color: #fff;transition: 0.7s; float: right; margin-top: 6px;}
+/*a:after a태그의 뒤에*/
+
+/* 투명 하양에서 빨강으로 바뀌게 하는 방법 2가지
+background-color: transparent;투명-->background-color: #e13;
+width: 0px;-->width: 100%;*/
+
+
+
+#gnb li a:hover:before{width: 100%; background-color:#004f93;}
+#gnb li a:hover:after{width: 100%; background-color: #004f93;}
+#gnb li a:hover{color: #fff;}
+#sns{float:right; margin-right: 1%;}
+
+#sns li{float: left; padding: 20px;}
+#sns li a{display: block; color: #333; font-size: 18px;}
+#sns li a:hover{color: #004f93;}
+
+
+
+/*main*/
+#vdo1{display: block;width: auto;height: 120%;position: absolute;top: 0;left: 0;z-index: 0;min-height: 100%;}
+.mainTitle{position: absolute; top: 40%; left: 0; color: #fff; font-size: 1.8em; z-index: 10; text-indent: 30px;line-height: 180px;}
+
+.introMore{background-image: url(./img/circle_wheelBtn.png); width: 80px; height: 80px; background-size: 60px 60px; background-repeat: no-repeat; background-position: center center; display: block;position: absolute; left: 50%; margin-left: -30px; bottom: 16%;z-index: 20; text-indent: -9999px; transition: 0.6s; line-height: 100px;} 
+.introMore:hover{background-size:80px 80px;}
+
+
+
+/*두번째영역*/
+.pageTitle{font-size: 28px; color: #004f93; line-height: 3.8em; text-indent: 30px;}
+.titTxt{color: #119DDA; }
+.imgGrop{}
+.imgGrop li{float: left; width: 33.3333%;height: 450px;}
+
+.imgGrop li a{
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+	display: block;
+	width: 100%;
+	height: 450px;
+	color: #fff;
+	text-shadow: 1px 1px 1px #333;
+	position: relative;
+}
+
+.imgGrop li a.item1{background-image: url(./img/index_cont02.jpg);}
+.imgGrop li a.item2{background-image: url(./img/index_cont03.jpg);}
+.imgGrop li a.item3{background-image: url(./img/index_cont04.jpg);}
+.itemBox{padding: 55px; position: relative; }
+
+/*단락*/
+.title1{font-size: 28px; line-height: 2em; font-weight: 400;}
+.detail{font-size: 20px; padding-top: 20px; position: relative;}
+.detail .small{font-size: 16px; margin-left: 15px}
+
+.hbar{display: block; width: 160px; height: 1px; background-color: #999; margin-top: 8px;}
+
+.detail:after{display: block; content: ""; width: 1px; height: 1px; background-color: #fff; transition: 0.6s;  position: absolute; left: 0; bottom: -9px;}
+
+.imgGrop li a:hover .detail:after{width: 160px; }
+
+
+
+/*라인애니메이션*/
+.lineAni{width: 94%; height: 430px;position: absolute;left: 2.5%; top: 10px; /*border: 1px solid #fff;*/
+}
+
+.lineFrame{
+	width: 100%; height: 100%; position: relative;
+}
+
+
+
+.lineAni .lineFrame span{ position: absolute; background-color: #fff; transition: 0.6s;}
+.top{width: 0; height: 1px; top: 0;left: 0;
+}
+.bottom{width: 0; height: 1px; bottom: 0; right: 0;
+}
+.left{width: 1px; height: 0px; left: 0; top: 0;
+}
+.right{width: 1px; height: 0px; bottom: 0; right: 0;
+}
+.imgGrop li a:hover .top{width: 100%;}
+.imgGrop li a:hover .bottom{width: 100%;}
+.imgGrop li a:hover .left{height:100%; }
+.imgGrop li a:hover .right{height: 100%;}
+
+
+
+
+
+/*page3 3번 페이지*/
+
+.imgFrame{width: 100%;}
+.imgFrame li{float: left; width: 50%; height: 400px;margin-top: 20px;}
+
+.imgFrame li a{display: block; width: 98%; height: 400px;margin: 10 auto; position: relative;color: #fff; overflow: hidden;}
+.imgFrame li a .imgBox{
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+	display: block;
+	width: 100%;
+	height: 400px;
+}
+
+.imgFrame li a .cate1{
+	background-image: url(./img/banner01.jpg);
+}
+.imgFrame li a .cate2{
+	background-image: url(./img/banner02.jpg);
+}
+.imgFrame li a .cate3{
+	background-image: url(./img/banner03.jpg);
+}
+.imgFrame li a .cate4{
+	background-image: url(./img/banner04.jpg);
+}
+
+.titleBox{position: absolute; top: 0; right: 0; width: 30%; height: 400px; background-color: rgba(0,0,0,0.7); padding: 20px 20px 0 20px; z-index: 10;transition: 0.6s; }
+
+.imgFrame li a:hover .titleBox{width: 45%; background-color: rgb(232, 123, 56, 0.8);} /*rgb(238, 17, 51,0.8(투명도)); 구글 컬러피커검색후 세숫자 넣고 투명도*/
+
+.title2{width: 160px; font-weight: 300; font-size: 20px; line-height: 1.8em; word-wrap: break-word;}/*word-wrap: break-word;단어들을 깨트리지않겠다.*/
+
+
+
+
+/*page4 페이지4*/
+
+#page4{clear: both; width: 100%;}
+#page4 .pageTitle{padding-top: 50px;}
+/*100% li*/
+#page4 .imgFrame li{width: 100%; height: 350px; /*overflow: hidden;*/}
+.peoImg{width: 100%; display: block; height: 350px;}
+.titleBox2{position: absolute; top: 30px; left: 0;width: 100%; height: 100%; text-indent: 30px;}
+.title3{font-weight: 300; line-height: 130px; padding-right: -80px;}
+.titleBox2 .more{display: block;color: #004f93;}
+.lineAni{width: 98%; height: 330px;  position: absolute; left: 1%; top: 10px;}
+.imgFrame li a:hover .top{width: 100%}
+.imgFrame li a:hover .bottom{width: 100%}
+.imgFrame li a:hover .left{height: 100%;}
+.imgFrame li a:hover .right{height: 100%;}
+
+/*푸터영역*/
+#ft{clear: both; width: 100%;background-color: #005689; color: #fff; height: 200px;line-height: 200px; background-image: url(./img/ft_logo.png);background-repeat: no-repeat; background-position:  50px center; text-indent: 250px;
+	/* 	text-indent: 250px; 
+		padding-left: 250px;*/}
+
+#ft .ftWrap{width: 90%; height: 200px; margin: 0 auto; background-image: url(./img/wa.png);background-repeat: no-repeat; background-position: right center; line-height: 40px; text-align: center;padding-right: 90px; }
